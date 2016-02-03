@@ -1,0 +1,10 @@
+{
+  "session":{
+    "secret" : "afv5qgcaegerxdcb",
+    "keys" : "v5hacqy34pmxadvc"
+  },
+  "enc":{
+    "secret1": "nniqipciupbvq",
+    "secret2": "owixnpqrpgaef"
+  }
+}
