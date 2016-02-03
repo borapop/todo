@@ -10,13 +10,9 @@ app.use(session(app));
 app.use(serve(__dirname + '/public'));
 
 
-router.get('/', user.profile);
-router.get('/exit', user.exit);
 
-router.get('/login', user.authorization);
 router.post('/login', user.authorize);
 
-router.get('/register', user.registration);
 router.post('/register', user.register);
 
 

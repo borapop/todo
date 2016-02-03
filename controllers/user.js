@@ -4,18 +4,6 @@ var parse = require('co-body');
 var log4js = require('log4js');
 var logger = log4js.getLogger();
 
-var views = require('co-views');
-
-var path  = require('path');
-var render = views('views', {
-    ext: 'ejs'
-});
-
-
-exports.registration = function *(next) {
-    logger.debug('GET /register');
-    this.body = yield render('register');
-};
 
 exports.register = function *(next) {
     var body = yield parse(this);
@@ -29,16 +17,11 @@ exports.register = function *(next) {
         newUser = null;
     }
     if (!newUser) {
-        this.status = 401;
+        this.json({"Error" : "User exists"});
     } else {
-        this.redirect('/login');
+        this.json({"User" : newUser.username});
     }
 
-};
-
-exports.authorization = function *(next) {
-    logger.debug('GET /login');
-    this.body = yield render('index');
 };
 
 exports.authorize = function *(next) {
@@ -56,32 +39,14 @@ exports.authorize = function *(next) {
 
     logger.debug('User: ' + User);
     if (!User) {
-        this.status = 401;
+        this.json({"Error" : "Such username and password are not found"});
     } else {
         this.session.userId = User._id;
-        this.redirect('/profile');
     }
 
 };
 
-exports.exit = function *(next)
 
-{
-    this.session.userId = yield null;
-};
 
-exports.edit = function *(next) {
 
-};
-
-exports.profile = function *(next) {
-    logger.debug('GET /profile');
-    logger.debug('session.userId: ' + this.session.userId);
-    if (!this.session.userId) {
-        this.redirect('/login');
-    } else {
-        this.body = yield render('profile');
-    }
-
-};
 
