@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p= error
+  p Welcome to #{title}
+  
+  form(id="newTask" method="post")
+    input(type="text" name="name")
+    textarea(form="newTask" name="body")
+    input(type="submit")
