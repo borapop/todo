@@ -1,8 +1,10 @@
 extends layout
 
 block content
+  a(href="/logout") logout
+  br
+  a(href="/tasks/new") add task
   h1= title
-  p Welcome to #{title}
   
   ul
   each val, index in tasks

@@ -30,9 +30,34 @@ router.get('/:taskName', function(req, res, next) {
       res.render('task', { title: 'Tasks', task: docs});
     });
   }
-  
-  
 });
+
+router.get('/:taskName/edit', function(req, res, next) {
+
+  Task.findOne({
+    author: req.user.username,
+    name: req.params.taskName
+  }, function(err, docs){
+    
+    res.render('taskEdit', { title: 'Tasks', task: docs});
+  });
+});
+
+
+router.post('/:taskName/edit', function(req, res, next) {
+
+  Task.findOneAndUpdate({
+    author: req.user.username,
+    name: req.params.taskName
+  }, {
+    body: req.body.body
+  },
+  function(err, docs){
+    
+   res.redirect('/tasks/' + req.params.taskName);
+  });
+});
+
 
 router.get('/new', function(req, res, next) {
   res.render('newTask', { title: 'New' });

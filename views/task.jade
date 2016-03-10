@@ -1,7 +1,10 @@
 extends layout
 
 block content
+  a(href="/tasks/") All tasks
   h1= task.name
+  
+  a(href= "/tasks/" + task.name + "/edit") edit
   p= task.body
   
   

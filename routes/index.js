@@ -12,11 +12,22 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  if (req.user) {
+    res.redirect('/tasks');
+  } else {
+    res.render('index', { title: 'Express' });
+  }
+  
+});
+
+
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/');
 });
 
 router.post('/', passport.authenticate('local'), function(req, res) {
-  res.redirect('/tasks');
+  res.redirect('/');
 });
 
 

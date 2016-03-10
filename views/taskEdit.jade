@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= task.name
+  
+  form(id="newTask" method="post")
+    textarea(form="newTask" name="body")= task.body
+    input(type="submit")

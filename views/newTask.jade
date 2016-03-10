@@ -3,9 +3,10 @@ extends layout
 block content
   h1= title
   p= error
-  p Welcome to #{title}
   
   form(id="newTask" method="post")
     input(type="text" name="name")
+    br
     textarea(form="newTask" name="body")
+    br
     input(type="submit")
